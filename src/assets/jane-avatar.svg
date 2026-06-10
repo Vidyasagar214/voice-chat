@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="40" y1="20" x2="160" y2="200" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7C3AED"/>
+      <stop offset="0.55" stop-color="#A855F7"/>
+      <stop offset="1" stop-color="#6366F1"/>
+    </linearGradient>
+    <linearGradient id="hair" x1="70" y1="30" x2="130" y2="120" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2D1B4E"/>
+      <stop offset="1" stop-color="#4C1D95"/>
+    </linearGradient>
+    <linearGradient id="skin" x1="80" y1="70" x2="120" y2="150" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F5D0C5"/>
+      <stop offset="1" stop-color="#E8B4A8"/>
+    </linearGradient>
+    <radialGradient id="cheek" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(100 118) rotate(90) scale(28)">
+      <stop stop-color="#F9A8D4" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#F9A8D4" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="top" x1="60" y1="150" x2="140" y2="200" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#5B21B6"/>
+      <stop offset="1" stop-color="#7C3AED"/>
+    </linearGradient>
+  </defs>
+  <circle cx="100" cy="100" r="100" fill="url(#bg)"/>
+  <ellipse cx="100" cy="188" rx="72" ry="38" fill="url(#top)"/>
+  <path d="M48 118C48 78 70 48 100 48C130 48 152 78 152 118C152 138 145 154 134 166C126 175 114 180 100 180C86 180 74 175 66 166C55 154 48 138 48 118Z" fill="url(#hair)"/>
+  <path d="M56 112C56 84 74 64 100 64C126 64 144 84 144 112C144 126 139 138 131 146C124 153 113 157 100 157C87 157 76 153 69 146C61 138 56 126 56 112Z" fill="url(#skin)"/>
+  <ellipse cx="100" cy="118" rx="34" ry="30" fill="url(#cheek)"/>
+  <path d="M72 108C74 100 80 96 86 98C82 104 78 110 74 114C72 112 71 110 72 108Z" fill="#2D1B4E" opacity="0.85"/>
+  <path d="M128 108C126 100 120 96 114 98C118 104 122 110 126 114C128 112 129 110 128 108Z" fill="#2D1B4E" opacity="0.85"/>
+  <path d="M88 104C90 101 93 100 96 101C95 104 92 106 89 106C88 105 88 104 88 104Z" fill="#3B1F4A"/>
+  <path d="M104 101C107 100 110 101 112 104C112 104 112 105 111 106C108 106 105 104 104 101Z" fill="#3B1F4A"/>
+  <path d="M82 112C86 108 94 106 100 106C106 106 114 108 118 112" stroke="#C47A6E" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M94 120C97 123 103 123 106 120" stroke="#B86B60" stroke-width="2" stroke-linecap="round"/>
+  <path d="M100 88C93 88 88 92 86 98C90 94 95 92 100 92C105 92 110 94 114 98C112 92 107 88 100 88Z" fill="#2D1B4E" opacity="0.2"/>
+  <path d="M62 96C58 88 60 76 68 70C64 80 62 88 62 96Z" fill="url(#hair)"/>
+  <path d="M138 96C142 88 140 76 132 70C136 80 138 88 138 96Z" fill="url(#hair)"/>
+  <circle cx="100" cy="52" r="10" fill="#FDE68A" opacity="0.18"/>
+</svg>
