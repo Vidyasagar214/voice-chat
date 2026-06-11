@@ -1,6 +1,7 @@
 {
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
+  "buildCommand": "npm run build -w voiceflow-frontend",
+  "outputDirectory": "frontend/dist",
+  "installCommand": "npm install",
   "rewrites": [
     { "source": "/((?!api/).*)", "destination": "/index.html" }
   ]

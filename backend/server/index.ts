@@ -1,4 +1,4 @@
-import 'dotenv/config'
+import dotenv from 'dotenv'
 import cors from 'cors'
 import express from 'express'
 import path from 'node:path'
@@ -7,6 +7,8 @@ import { chatRouter } from './routes/chat.js'
 import { isValidGroqKey } from './groq.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
+dotenv.config({ path: path.join(__dirname, '../../.env') })
+
 const PORT = Number(process.env.PORT) || 8787
 const isProduction = process.env.NODE_ENV === 'production'
 
@@ -31,7 +33,7 @@ app.get('/api/health', (_req, res) => {
 app.use('/api', chatRouter)
 
 if (isProduction) {
-  const distPath = path.join(__dirname, '../dist')
+  const distPath = path.join(__dirname, '../../frontend/dist')
   app.use(express.static(distPath))
   app.get('*', (_req, res) => {
     res.sendFile(path.join(distPath, 'index.html'))

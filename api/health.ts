@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
-import { isValidGroqKey } from '../server/groq.js'
+import { isValidGroqKey } from '../backend/server/groq.js'
 
 export default function handler(_req: VercelRequest, res: VercelResponse) {
   if (_req.method !== 'GET') {

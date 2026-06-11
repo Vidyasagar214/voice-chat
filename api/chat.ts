@@ -1,7 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
-import { formatGroqError } from '../server/formatGroqError.js'
-import { getGroqReply } from '../server/groq.js'
-import type { ChatRequestBody } from '../server/types.js'
+import { formatGroqError } from '../backend/server/formatGroqError.js'
+import { getGroqReply } from '../backend/server/groq.js'
+import type { ChatRequestBody } from '../backend/server/types.js'
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {

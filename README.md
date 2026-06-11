@@ -1,73 +1,60 @@
-# React + TypeScript + Vite
+# VoiceFlow
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Voice-first AI chat with Jane — real-time listening, Groq-powered replies, and browser TTS.
 
-Currently, two official plugins are available:
+## Project structure
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+voice-chat/
+├── frontend/     React + Vite UI (mic, STT, TTS, settings)
+├── backend/      Express API + Groq (local dev)
+├── api/          Vercel serverless routes (production)
+└── package.json  npm workspaces root
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Setup
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1. Copy `.env.example` to `.env` at the repo root
+2. Add your Groq API key (`gsk_...` from [console.groq.com](https://console.groq.com/keys))
+3. Install dependencies:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
+
+## Development
+
+Run frontend and backend together:
+
+```bash
+npm run dev:all
+```
+
+- Frontend: http://localhost:5173
+- Backend API: http://localhost:8787
+
+Or run separately:
+
+```bash
+npm run dev:backend   # API only
+npm run dev           # Frontend only (proxies /api → backend)
+```
+
+## Build
+
+```bash
+npm run build         # Frontend production build → frontend/dist
+npm run typecheck     # Backend TypeScript check
+```
+
+## Deploy (Vercel — frontend + API in one project)
+
+1. Push to GitHub and import in Vercel
+2. Set `GROQ_API_KEY` in Environment Variables
+3. Deploy — `vercel.json` builds `frontend/` and serves `api/` routes
+
+## Requirements
+
+- Chrome or Edge for speech recognition
+- Microphone permission (HTTPS in production)
+- Groq API key for Jane's replies

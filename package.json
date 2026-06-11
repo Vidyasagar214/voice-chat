@@ -3,47 +3,23 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
   "scripts": {
-    "dev": "vite",
-    "server": "tsx watch server/index.ts",
-    "dev:all": "concurrently -n server,web -c blue,green \"npm run server\" \"npm run dev\"",
-    "build": "tsc -b && vite build",
-    "start": "tsx server/index.ts",
-    "lint": "eslint .",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "@ricky0123/vad-web": "^0.0.30",
-    "cors": "^2.8.5",
-    "dotenv": "^16.5.0",
-    "express": "^5.1.0",
-    "framer-motion": "^12.40.0",
-    "groq-sdk": "^0.25.0",
-    "lucide-react": "^1.17.0",
-    "react": "^19.2.6",
-    "react-dom": "^19.2.6",
-    "react-router-dom": "^7.16.0",
-    "zustand": "^5.0.14"
+    "dev": "npm run dev -w voiceflow-frontend",
+    "dev:backend": "npm run dev -w voiceflow-backend",
+    "dev:all": "concurrently -n api,web -c blue,green \"npm run dev -w voiceflow-backend\" \"npm run dev -w voiceflow-frontend\"",
+    "build": "npm run build -w voiceflow-frontend",
+    "build:frontend": "npm run build -w voiceflow-frontend",
+    "build:backend": "npm run typecheck -w voiceflow-backend",
+    "start": "npm run start -w voiceflow-backend",
+    "lint": "npm run lint -w voiceflow-frontend",
+    "typecheck": "npm run typecheck -w voiceflow-backend && tsc --noEmit -p tsconfig.json"
   },
   "devDependencies": {
-    "@eslint/js": "^10.0.1",
-    "@tailwindcss/vite": "^4.3.0",
-    "@types/cors": "^2.8.18",
-    "@types/express": "^5.0.2",
-    "@types/node": "^24.12.3",
-    "@types/react": "^19.2.14",
-    "@types/react-dom": "^19.2.3",
     "@vercel/node": "^5.8.14",
-    "@vitejs/plugin-react": "^6.0.1",
-    "concurrently": "^9.1.2",
-    "eslint": "^10.3.0",
-    "eslint-plugin-react-hooks": "^7.1.1",
-    "eslint-plugin-react-refresh": "^0.5.2",
-    "globals": "^17.6.0",
-    "tailwindcss": "^4.3.0",
-    "tsx": "^4.19.4",
-    "typescript": "~6.0.2",
-    "typescript-eslint": "^8.59.2",
-    "vite": "^8.0.12"
+    "concurrently": "^9.1.2"
   }
 }
