@@ -9,7 +9,7 @@ export function isSpeechSynthesisSupported(): boolean {
   return typeof window !== 'undefined' && 'speechSynthesis' in window
 }
 
-function waitForVoices(): Promise<SpeechSynthesisVoice[]> {
+function waitForVoices(timeoutMs = 2500): Promise<SpeechSynthesisVoice[]> {
   return new Promise((resolve) => {
     const existing = speechSynthesis.getVoices()
     if (existing.length > 0) {
@@ -17,10 +17,23 @@ function waitForVoices(): Promise<SpeechSynthesisVoice[]> {
       return
     }
 
-    const onVoicesChanged = () => {
+    let settled = false
+
+    const finish = (voices: SpeechSynthesisVoice[]) => {
+      if (settled) return
+      settled = true
       speechSynthesis.removeEventListener('voiceschanged', onVoicesChanged)
-      resolve(speechSynthesis.getVoices())
+      window.clearTimeout(timeoutId)
+      resolve(voices)
     }
+
+    const onVoicesChanged = () => {
+      finish(speechSynthesis.getVoices())
+    }
+
+    const timeoutId = window.setTimeout(() => {
+      finish(speechSynthesis.getVoices())
+    }, timeoutMs)
 
     speechSynthesis.addEventListener('voiceschanged', onVoicesChanged)
     speechSynthesis.getVoices()

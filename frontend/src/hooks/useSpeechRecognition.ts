@@ -2,57 +2,11 @@ import { useCallback, useEffect, useRef } from 'react'
 import { getRecognitionLang } from '../constants/voicePresets'
 import { useVoiceStore } from '../store/voiceStore'
 
-interface SpeechRecognitionResultItem {
-  transcript: string
-  confidence: number
-}
-
-interface SpeechRecognitionResult {
-  isFinal: boolean
-  length: number
-  [index: number]: SpeechRecognitionResultItem
-}
-
-interface SpeechRecognitionResultList {
-  length: number
-  [index: number]: SpeechRecognitionResult
-}
-
-interface SpeechRecognitionEvent {
-  results: SpeechRecognitionResultList
-  resultIndex: number
-}
-
-interface SpeechRecognitionErrorEvent {
-  error: string
-  message?: string
-}
-
-interface SpeechRecognitionInstance extends EventTarget {
-  continuous: boolean
-  interimResults: boolean
-  lang: string
-  maxAlternatives: number
-  start: () => void
-  stop: () => void
-  abort: () => void
-  onresult: ((event: SpeechRecognitionEvent) => void) | null
-  onerror: ((event: SpeechRecognitionErrorEvent) => void) | null
-  onend: (() => void) | null
-  onstart: (() => void) | null
-}
-
-declare global {
-  interface Window {
-    SpeechRecognition: new () => SpeechRecognitionInstance
-    webkitSpeechRecognition: new () => SpeechRecognitionInstance
-  }
-}
-
 const RESTART_DELAY_MS = 50
 const FLUSH_TIMEOUT_MS = 2200
 
-function getSpeechRecognitionCtor(): (new () => SpeechRecognitionInstance) | null {
+function getSpeechRecognitionCtor(): (new () => SpeechRecognition) | null {
+  if (typeof window === 'undefined') return null
   return window.SpeechRecognition || window.webkitSpeechRecognition || null
 }
 
@@ -65,7 +19,7 @@ export function useSpeechRecognition(enabled: boolean, restartKey = '') {
   const assistantVoice = useVoiceStore((s) => s.settings.assistantVoice)
   const recognitionLang = getRecognitionLang(assistantVoice)
 
-  const recognitionRef = useRef<SpeechRecognitionInstance | null>(null)
+  const recognitionRef = useRef<SpeechRecognition | null>(null)
   const finalizedRef = useRef('')
   const interimRef = useRef('')
   const shouldRunRef = useRef(false)

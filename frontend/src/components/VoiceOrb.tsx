@@ -38,7 +38,7 @@ export function VoiceOrb() {
   const isSpeaking = state === 'SPEAKING'
 
   return (
-    <div className="relative flex items-center justify-center">
+    <div className="relative flex scale-90 items-center justify-center sm:scale-100">
       {/* Ambient glow */}
       <motion.div
         className="absolute rounded-full"

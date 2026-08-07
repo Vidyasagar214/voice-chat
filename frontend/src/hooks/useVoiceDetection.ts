@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import type { MicVAD as MicVADType } from '@ricky0123/vad-web'
+import { formatMediaError } from '../utils/browserCapabilities'
 import { useVoiceStore } from '../store/voiceStore'
 
 interface UseVoiceDetectionOptions {
@@ -79,6 +80,22 @@ export function useVoiceDetection({
       try {
         setMicError(null)
 
+        if (!window.isSecureContext && location.hostname !== 'localhost') {
+          setMicError(
+            'Microphone requires HTTPS. Open this app over a secure connection',
+          )
+          setMicrophoneEnabled(false)
+          setConversationState('IDLE')
+          return
+        }
+
+        if (!navigator.mediaDevices?.getUserMedia) {
+          setMicError('This browser does not support microphone access')
+          setMicrophoneEnabled(false)
+          setConversationState('IDLE')
+          return
+        }
+
         const audioConstraints: MediaTrackConstraints = {
           echoCancellation: true,
           noiseSuppression: true,
@@ -149,9 +166,7 @@ export function useVoiceDetection({
         vadRef.current = vad
         await vad.start()
       } catch (err) {
-        const message =
-          err instanceof Error ? err.message : 'Microphone access denied'
-        setMicError(message)
+        setMicError(formatMediaError(err))
         setMicrophoneEnabled(false)
         setConversationState('IDLE')
       }

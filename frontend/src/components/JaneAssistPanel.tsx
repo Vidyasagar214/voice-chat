@@ -107,7 +107,7 @@ export function JaneAssistPanel({
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.45 }}
-      className="glass w-full max-w-md rounded-3xl border border-border p-6 shadow-xl md:p-8"
+      className="glass w-full max-w-md rounded-3xl border border-border p-4 shadow-xl sm:p-6 md:p-8"
     >
       {/* Profile header */}
       <div className="mb-8 flex items-start justify-between gap-4">
@@ -132,7 +132,7 @@ export function JaneAssistPanel({
           </div>
         </div>
         <span
-          className={`shrink-0 rounded-full px-3 py-1 text-xs font-medium ${status.className}`}
+          className={`max-w-[9.5rem] shrink-0 truncate rounded-full px-2.5 py-1 text-[11px] font-medium sm:max-w-none sm:px-3 sm:text-xs ${status.className}`}
         >
           {status.text}
         </span>
@@ -159,7 +159,7 @@ export function JaneAssistPanel({
             type="button"
             onClick={onStart}
             disabled={assistantReady === false || !speechSupported}
-            className="flex w-full max-w-xs items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-violet-600 to-fuchsia-600 px-8 py-4 text-base font-semibold text-white shadow-lg shadow-violet-500/30 transition-transform hover:scale-[1.02] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
+            className="flex min-h-12 w-full max-w-xs items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-violet-600 to-fuchsia-600 px-6 py-3.5 text-base font-semibold text-white shadow-lg shadow-violet-500/30 transition-transform hover:scale-[1.02] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 sm:px-8 sm:py-4"
           >
             <Mic size={20} />
             Start Talking
@@ -168,7 +168,7 @@ export function JaneAssistPanel({
           <button
             type="button"
             onClick={onStop}
-            className="flex w-full max-w-xs items-center justify-center gap-2 rounded-2xl border-2 border-red-500/40 bg-red-500/10 px-8 py-4 text-base font-semibold text-red-400 transition-colors hover:bg-red-500/20"
+            className="flex min-h-12 w-full max-w-xs items-center justify-center gap-2 rounded-2xl border-2 border-red-500/40 bg-red-500/10 px-6 py-3.5 text-base font-semibold text-red-400 transition-colors hover:bg-red-500/20 sm:px-8 sm:py-4"
           >
             <Square size={18} fill="currentColor" />
             Stop
@@ -183,8 +183,9 @@ export function JaneAssistPanel({
         )}
 
         {!sessionActive && !speechSupported && (
-          <p className="text-center text-xs text-amber-400">
-            Voice chat requires Chrome or Edge for live speech recognition.
+          <p className="px-2 text-center text-xs leading-relaxed text-amber-400">
+            Voice chat needs microphone + speech recognition. Use the latest Chrome or Edge
+            on desktop or mobile for the best results.
           </p>
         )}
 
@@ -196,8 +197,8 @@ export function JaneAssistPanel({
       </div>
 
       {micError && (
-        <div className="mb-6 rounded-2xl border border-red-500/20 bg-red-500/10 px-4 py-3 text-center text-sm text-red-300">
-          {micError}. Please allow microphone access and try again.
+        <div className="mb-6 rounded-2xl border border-red-500/20 bg-red-500/10 px-4 py-3 text-center text-sm leading-relaxed text-red-300">
+          {micError}
         </div>
       )}
 
@@ -225,7 +226,7 @@ export function JaneAssistPanel({
               )}
               {assistantReady === false && (
                 <span className="text-amber-400">
-                  Not ready — run dev:all and set GROQ_API_KEY
+                  Not ready — check API connection / GROQ_API_KEY
                 </span>
               )}
             </p>

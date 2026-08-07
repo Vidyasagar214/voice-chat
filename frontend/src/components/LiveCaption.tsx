@@ -19,7 +19,7 @@ export function LiveCaption() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 12 }}
-          className="pointer-events-none fixed bottom-6 left-1/2 z-20 w-[min(92vw,36rem)] -translate-x-1/2"
+          className="pointer-events-none fixed bottom-[max(1.25rem,env(safe-area-inset-bottom))] left-1/2 z-20 w-[min(92vw,36rem)] -translate-x-1/2 px-2"
         >
           <div className="glass rounded-2xl border border-border px-5 py-3 shadow-xl">
             <p className="mb-1 text-[11px] font-medium uppercase tracking-wider text-accent-light">

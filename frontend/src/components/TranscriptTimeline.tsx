@@ -34,7 +34,7 @@ export function TranscriptTimeline({ onReplay }: TranscriptTimelineProps) {
       <div
         ref={scrollRef}
         className="flex-1 space-y-4 overflow-y-auto pr-2 scrollbar-thin"
-        style={{ maxHeight: 'calc(100vh - 420px)' }}
+        style={{ maxHeight: 'min(60dvh, calc(100dvh - 320px))' }}
       >
         {transcripts.length === 0 && !liveTranscript && (
           <motion.div
